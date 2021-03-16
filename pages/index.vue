@@ -31,13 +31,14 @@
 
 <script lang="ts">
   import { Component, Vue } from 'nuxt-property-decorator'
+  import { fabricCanvas } from '@/interfaces'
 
   @Component
   export default class Index extends Vue {
     savedPaletteDate = {}
 
-    get palette() {
-      return this.$refs.palette;
+    get palette(): fabricCanvas {
+      return (this.$refs as any).palette;
     }
 
     redo() {
@@ -50,7 +51,7 @@
 
     remove() {
       const activeObjects = this.palette.fabric.getActiveObjects();
-      activeObjects.forEach((element) => {
+      activeObjects.forEach((element: HTMLElement) => {
         this.palette.fabric.remove(element);
       });
     }
